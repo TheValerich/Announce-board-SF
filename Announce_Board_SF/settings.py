@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django.contrib.sites',
     'board',
+    'sign',
 ]
 
 MIDDLEWARE = [
@@ -82,3 +83,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 STATICFILES_DIRS = [BASE_DIR / 'static']
+LOGIN_REDIRECT_URL = 'posts_url'
+LOGIN_URL = 'login_url'
