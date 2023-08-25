@@ -1,4 +1,6 @@
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import (
+    CreateView, ListView, UpdateView, DetailView
+)
 from .models import Post, Comment
 
 
@@ -13,5 +15,11 @@ class CommentCreateView(CreateView):
     template_name = 'comment.html'
     context_object_name = 'comment'
     fields = [
-        'content',
+        'content', 'post', 'author',
     ]
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post.html'
+    context_object_name = 'post'

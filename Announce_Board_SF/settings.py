@@ -2,7 +2,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'django.contrib.sites',
-    'board',
+    'board.apps.BoardConfig',
     'sign',
 ]
 
@@ -37,8 +36,7 @@ ROOT_URLCONF = 'Announce_Board_SF.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,3 +83,6 @@ SITE_ID = 1
 STATICFILES_DIRS = [BASE_DIR / 'static']
 LOGIN_REDIRECT_URL = 'posts_url'
 LOGIN_URL = 'login_url'
+# Отладочный SMTP сервер для отправки писем с требованием активации
+# Команда для запуска: python -m smtpd -n -c DebuggingServer localhost:1025
+EMAIL_PORT = 1025

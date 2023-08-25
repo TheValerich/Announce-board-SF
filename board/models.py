@@ -5,6 +5,9 @@ from django.urls import reverse
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+    is_activated = models.BooleanField(
+        default=True, db_index=True, verbose_name='Прошёл активацию?'
+    )
 
 
 class Post(models.Model):
@@ -18,8 +21,11 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    content = models.TextField(verbose_name="Текст")
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, null=True, blank=True, verbose_name="Объявление")
+    content = models.TextField(verbose_name="Текст отклика")
+    post = models.ForeignKey('Post', on_delete=models.CASCADE,
+                             null=True, blank=True, verbose_name="Объявление", related_name='connect_post'
+                             )
+    author = models.OneToOneField('Author', on_delete=models.CASCADE, to_field='user', null=True, blank=True, )
 
     def get_absolute_url(self):
         return reverse('posts_url')
@@ -30,4 +36,3 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
-

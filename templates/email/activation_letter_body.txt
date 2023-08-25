@@ -1,0 +1,4 @@
+Уважаемый пользователь {{ user.username }}!
+
+Для продолжения активации, перейдите по ссылке
+{{ host }}{% url 'board:register_activate_url' %}
